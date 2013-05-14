@@ -1,3 +1,2 @@
 shakki
 ======
-shakki-ohjelma

@@ -47,7 +47,7 @@ public class LautaTest {
     public void alustaLautaAsettaaValkealleVuoron() {
         Lauta lauta = new Lauta();
         lauta.alustaLauta();
-        assertEquals(1, lauta.getVuoro());
+        assertEquals(1, lauta.getPelaaja());
     }
     
     @Test
@@ -58,35 +58,80 @@ public class LautaTest {
     }
     
     @Test
-    public void alustaLautaAsettaaLinnoittaumismahdollisuudet() {
+    public void alustaLautaAsettaaValkeanLinnoittaumismahdollisuudet() {
         Lauta lauta = new Lauta();
         lauta.alustaLauta();
-        boolean[] linnoittautuminen = {true, true, true, true};
-        for (int i = 0; i < 4; i++) {
-            assertTrue(linnoittautuminen[i] == lauta.getLinnoittautuminen()[i]);
+        boolean[] linnoittautuminenValkea = {true, true};
+        for (int i = 0; i < 2; i++) {
+            assertTrue(linnoittautuminenValkea[i] == lauta.getLinnoittautuminenValkea()[i]);
         }
     }
     
     @Test
-    public void alustaLautaEiAsetaValkeaaShakkiin() {
+    public void alustaLautaAsettaaMustanLinnoittaumismahdollisuudet() {
         Lauta lauta = new Lauta();
         lauta.alustaLauta();
-        assertTrue(lauta.getOnkoShakissa() == false);
+        boolean[] linnoittautuminenMusta = {true, true};
+        for (int i = 0; i < 2; i++) {
+            assertTrue(linnoittautuminenMusta[i] == lauta.getLinnoittautuminenMusta()[i]);
+        }
     }
     
     @Test
-    public void alustaTyhjaLautaAsettaaTyhjanLaudan() {
+    public void alustaLautaAsettaaKuninkaidenSijainnit() {
         Lauta lauta = new Lauta();
-        lauta.alustaTyhjaLauta();
-        int[][] tyhjaLauta = new int[][]{ {0, 0, 0, 0, 0, 0, 0, 0}, 
-                {0, 0, 0, 0, 0, 0, 0, 0}, 
-                {0, 0, 0, 0, 0, 0, 0, 0}, 
-                {0, 0, 0, 0, 0, 0, 0, 0}, 
-                {0, 0, 0, 0, 0, 0, 0, 0}, 
-                {0, 0, 0, 0, 0, 0, 0, 0}, 
-                {0, 0, 0, 0, 0, 0, 0, 0}, 
-                {0, 0, 0, 0, 0, 0, 0, 0} };
-        assertArrayEquals(tyhjaLauta, lauta.getLauta());
+        lauta.alustaLauta();
+        int[][] kuninkaat = new int[][]{ {4, 0}, {4, 7} };
+        assertArrayEquals(kuninkaat, lauta.getKuninkaidenSijainti());
+    }
+    
+////    @Test
+////    public void alustaTyhjaLautaAsettaaTyhjanLaudan() {
+////        Lauta lauta = new Lauta();
+////        lauta.alustaTyhjaLauta();
+////        int[][] tyhjaLauta = new int[][]{ {0, 0, 0, 0, 0, 0, 0, 0}, 
+////                {0, 0, 0, 0, 0, 0, 0, 0}, 
+////                {0, 0, 0, 0, 0, 0, 0, 0}, 
+////                {0, 0, 0, 0, 0, 0, 0, 0}, 
+////                {0, 0, 0, 0, 0, 0, 0, 0}, 
+////                {0, 0, 0, 0, 0, 0, 0, 0}, 
+////                {0, 0, 0, 0, 0, 0, 0, 0}, 
+////                {0, 0, 0, 0, 0, 0, 0, 0} };
+////        assertArrayEquals(tyhjaLauta, lauta.getLauta());
+////    }
+    
+    @Test
+    public void alustaNappulaAlustaaNappulanKohteeseen() {
+        Lauta lauta = new Lauta();
+        lauta.alustaNappula(2, 4, 5);
+        assertEquals(2, lauta.getNappula(4,5));
+    }
+    
+    @Test
+    public void onkoRuutuLaudallaToimii() {
+        Lauta lauta = new Lauta();
+        assertTrue(false == lauta.getOnkoRuutuLaudalla(-1,4));
+        assertTrue(false == lauta.getOnkoRuutuLaudalla(0,-3));
+        assertTrue(false == lauta.getOnkoRuutuLaudalla(-2,8));
+        assertTrue(true == lauta.getOnkoRuutuLaudalla(0,0));
+        assertTrue(true == lauta.getOnkoRuutuLaudalla(1,4));
+        assertTrue(true == lauta.getOnkoRuutuLaudalla(7,7));
+        assertTrue(false == lauta.getOnkoRuutuLaudalla(8,4));
+    }
+    
+    @Test
+    public void monestikoRuutuUhattuAntaaAlkuasemassaOikeitaArvoja() {
+        Lauta lauta = new Lauta();
+        lauta.alustaLauta();
+        assertEquals(0, lauta.getMonestikoRuutuUhattu(1,1,1));
+        assertEquals(0, lauta.getMonestikoRuutuUhattu(3,4,1));
+        assertEquals(0, lauta.getMonestikoRuutuUhattu(7,7,1));
+        assertEquals(1, lauta.getMonestikoRuutuUhattu(6,7,1));
+        assertEquals(2, lauta.getMonestikoRuutuUhattu(0,5,1));
+        assertEquals(4, lauta.getMonestikoRuutuUhattu(4,6,1));
+        assertEquals(0, lauta.getMonestikoRuutuUhattu(6,7,-1));
+        assertEquals(2, lauta.getMonestikoRuutuUhattu(0,2,-1));
+        assertEquals(4, lauta.getMonestikoRuutuUhattu(4,1,-1));
     }
     
     @Test
@@ -97,6 +142,29 @@ public class LautaTest {
         assertEquals(2, lauta.getPuolisiirto());
         lauta.paivitaSiirtotilastot();
         assertEquals(3, lauta.getPuolisiirto());
+    }
+    
+    @Test
+    public void paivitaSiirtotilastotPaivittaaPelaajan() {
+        Lauta lauta = new Lauta();
+        lauta.alustaLauta();
+        lauta.paivitaSiirtotilastot();
+        assertEquals(-1, lauta.getPelaaja());
+        lauta.paivitaSiirtotilastot();
+        assertEquals(1, lauta.getPelaaja());
+    }
+    
+    @Test
+    public void valiOnTyhjaAntaaOikeitaArvojaAlkuasemassa() {
+        Lauta lauta = new Lauta();
+        lauta.alustaLauta();
+        assertTrue(false == lauta.getValiOnTyhja(0,0,6,6));
+        assertTrue(true == lauta.getValiOnTyhja(1,1,6,6));
+        assertTrue(false == lauta.getValiOnTyhja(1,1,7,7));
+        assertTrue(false == lauta.getValiOnTyhja(0,6,3,6));
+        assertTrue(true == lauta.getValiOnTyhja(5,2,2,2));
+        assertTrue(false == lauta.getValiOnTyhja(1,6,7,0));
+        assertTrue(true == lauta.getValiOnTyhja(1,6,6,1));
     }
     
 }

@@ -5,31 +5,64 @@ import java.util.Scanner;
 public class Lauta {
     public static Scanner input = new Scanner(System.in);
     
+    /**
+     * Laudan nykyinen asema
+     */
     private int[][] lauta = new int[8][8];
+    /**
+     * Testilautaa käytetään siirron laillisuuden arvioimiseen
+     */
     int[][] testilauta = new int[8][8];
     String sarakkeet = "abcdefgh";
     String rivit = "12345678";
     String nappulat = "kdtlrs SRLTDK";
-    private int pelaaja; // Valkean 1 ja mustan -1, niin vuoronvaihdot kertomalla -1:llä.
+    /**
+     * Pelaajat, valkea 1 ja musta -1
+     */
+    private int pelaaja; // Vuoronvaihdot kertomalla -1:llä.
     // Koodin kirjoittaminen vuorojen avulla on hieman yksinkertaisempaa kuin esimerkiksi puolisiirto- ja siirtotilastojen kanssa.
     private int puolisiirto;
     
+    /**
+     * Attribuutti kertoo, ovatko valkean linnoittautumismahdollisuudet tallella
+     */
     private boolean[] linnoittautuminenValkea = new boolean[2]; //Ensimmäinen on lyhyt linnoittautuminen ja toinen pitkä
+    /**
+     * Attribuutti kertoo, ovatko mustan linnoittautumismahdollisuudet tallella
+     */
     private boolean[] linnoittautuminenMusta = new boolean[2];
     
+    /**
+     * Kertoo, milla sarakkeella sotilaan viimeisin kaksoisaskel on tapahtunut
+     */
     private int viimeisinKaksoisaskelX; // Sotilaan ohestalyöntiä varten tallennetaan millä sarakkeella
+    /**
+     * Kertoo puolisiirtoina, milloin sotilas teki viimeksi kaksoisaskeleen
+     */
     private int viimeisimmanKaksoisaskeleenAika; // ja millä hetkellä viimeisin sotilaan kaksoisaskel on tapahtunut
  
+    /**
+     * Sisältää kuninkaiden sijaintitiedot
+     */
     private int[][] kuninkaidenSijainti = new int[2][2]; // Helpompi tutkia shakkaus, kun pidetään kirjaa kuninkaiden sijainneista
     
     // onkoShakissa poistettiin ainakin väliaikaisesti: tutkiOnkoShakkaus-metodin sijaan käytetään onkoPelaajaShakissa-metodia
 ////    private boolean onkoShakissa; 
     
     // Näitä en nyt ainakaan heti käytä, mutta nämä olisivat varmaan avuksi tekoälylle siirtojen testauksessa
-    //int[][] sotilaanSiirrot = {{0, 1}, {0, 2}, {1, 1}, {-1, 1}};
+    //int[][] sotilaanSiirrot = {{0, 1}, {0, 2}, {1, 1}, {-1, 1}}
+    /**
+     * Ratsun mahdolliset siirrot
+     */
     int[][] ratsunSiirrot = {{1, 2}, {2, 1}, {2, -1}, {1, -2}, {-1, -2}, {-2, -1}, {-2, 1}, {-1, 2}};
     
+    /**
+     * Vaaka- ja pystysuorien liikkeiden suunnat
+     */
     int[][] linjasuunnat = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+    /**
+     * Viistosuuntaisten liikkeiden suunnat
+     */
     int[][] viistosuunnat = { {1, 1}, {1, -1}, {-1, -1}, {-1, 1} };
     
     
@@ -38,6 +71,9 @@ public class Lauta {
             
         }
         
+        /**
+         * Alustaa pelilaudan
+         */
         //Pelilaudan alustus
         //Pelilauta koostuu 8x8 int-taulukosta
         //Taulukkoon talletettavat numerot kertovat kulloisenkin asukin
@@ -120,10 +156,22 @@ public class Lauta {
 //////////            }
 //////////        }
         
+        /**
+         * Alustaa laudan ruutuun (x,y) valitun nappulan
+         * @param nappula
+         * @param x
+         * @param y 
+         */
         public void alustaNappula(int nappula, int x, int y) {
             lauta[x][y] = pelaaja * nappula;
         }
         
+        /**
+         * Korottaa päätyruutuun (x,y) edenneen sotilaan upseeriksi
+         * @param x
+         * @param y
+         * @param pelaaja 
+         */
         public void korotaNappula(int x, int y, int pelaaja) {
             while (true) {
                 System.out.println("Valitse, miksi nappulaksi korotat sotilaan?");
@@ -150,10 +198,16 @@ public class Lauta {
             }
         }
         
+        /**
+         * Asettaa pelivuoron valkealle
+         */
         public void alustaVuoro() {
             pelaaja = 1;
         }
         
+        /**
+         * Asettaa linnoittautumiset mahdollisiksi
+         */
         public void alustaLinnoittautuminen() {
             for (int i = 0; i < 2; i++) {
                 linnoittautuminenValkea[i] = true;
@@ -176,6 +230,12 @@ public class Lauta {
 //
 //        }
         
+        /**
+         * Kertoo sijaitseeko ruutu (x,y) laudalla
+         * @param x ruudun x-koordinaatti
+         * @param y ruudun y-koordinaatti
+         * @return onko ruutu laudalla
+         */
         public boolean onkoRuutuLaudalla(int x, int y) {
             if (x >= 0 && x < 8 && y >= 0 && y < 8) {
                 return true;
@@ -185,6 +245,11 @@ public class Lauta {
             }
         }
         
+        /**
+         * Tutkii, ovatko syötetyt ruudut laudalla ja myönteisessä tapauksessa jatketaan siirrä-metodiin
+         * @param ruutu1
+         * @param ruutu2 
+         */
     // Tarkistaa, ovatko annetut koordinaatit laudalla
         // ja jos ovat, niin jatketaan siirrä-metodiin
     public void kelpaavatkoSyotetytRuudut(String ruutu1, String ruutu2) {
@@ -217,7 +282,13 @@ public class Lauta {
         }
     }
         
-    
+    /**
+     * Metodi selvittää, kuinka moninkertaisesti ruutu on vihollisen uhkaama.
+     * @param ruutuX Ruudun x-koordinaatti
+     * @param ruutuY Ruudun y-koordinaatti
+     * @param omaPelaaja Pelaaja itse
+     * @return Uhkauksien lukumäärä, ei huomioi patteristoja, eli samasta suunnasta tulevia moninkertaisia uhkia.
+     */
     // Metodi tutkii, onko joku ruutu vihollisen uhkaama
     // Ruudussa mahdollisesti olevaan nappulaan ei kiinnitetä huomiota, mutta katsotaan uhkaako (tai suojeleeko) sitä vihollisnappula.
     // Etsitään jokaisesta hyökkäyssuunnasta ensimmäinen nappula, jos sellaisia on, 
@@ -282,7 +353,12 @@ public class Lauta {
         return uhkaajienLkm;
     }    
     
-    
+    /**
+     * Metodi tarkistaa, onko pelaaja shakissa
+     * @param pelaaja
+     * @param asema
+     * @return 
+     */
     // Ongelmana on, miten tutkia shakkaukset, matit ja patit, ja missä vaiheessa siirtoa...
         // Nyt ohjelma tutkii kertoo, jos vihollinen joutui shakkiin siirron lopussa
         // Ennen siirron toimeenpanoa pitäisi kuitenkin suorittaa tarkistus, ettei oma kuningas jäänyt tai joutunut shakkiin.
@@ -336,7 +412,13 @@ public class Lauta {
 //////        }
         
         
-        
+        /**
+         * Metodi tarkistaa, että valitsit oman nappulan ja myönteisessä tapauksessa jatkaa siirräNappula-metodeihin
+         * @param lahtoruutuX
+         * @param lahtoruutuY
+         * @param kohderuutuX
+         * @param kohderuutuY 
+         */
         public void siirra(int lahtoruutuX, int lahtoruutuY, int kohderuutuX, int kohderuutuY) {
             if (lauta[lahtoruutuX][lahtoruutuY] * pelaaja > 0) {
 //                System.out.println("Valitsemasi nappula on " + nappulat.charAt(lauta[lahtoruutuX][lahtoruutuY] + 6)+".\n");
@@ -369,12 +451,22 @@ public class Lauta {
             tulostaLauta();
         }
         
-        // Jokaisen siirron päättyessä päivitettävät tilastot
+        /**
+         * Jokaisen siirron jälkeen päivitettävät Siirtotilastot
+         */
         public void paivitaSiirtotilastot() {
             pelaaja = pelaaja*-1;
             puolisiirto++;
         }
         
+        /**
+         * Tarkistaa, että lähtö- ja kohderuutujen väliset ruudut ovat tyhjiä
+         * @param lahtoX
+         * @param lahtoY
+         * @param kohdeX
+         * @param kohdeY
+         * @return Totuusarvo, oliko väli tyhjä
+         */
         // Tarkistaa, onko väli tyhjä. Tänne tulevista arvoista on jo tarkastettu, että ne ovat nappulan liikeradalla.
         // Ensin tarkistetaan x- ja y-koordinaattien erotukset ja otetaan maksimi
         // Tarkistetaan sitten, että jokainen ruutu välillä on tyhjä
@@ -393,6 +485,13 @@ public class Lauta {
             }
         }
         
+        /**
+         * Metodi tarkistaa loput esteet sotilaan siirrolle. Jos niitä ei ole, niin siirto suoritetaan.
+         * @param lahtoruutuX
+         * @param lahtoruutuY
+         * @param kohderuutuX
+         * @param kohderuutuY 
+         */
         // Ovatkohan nämä siirrä-metodien ehdot hieman vaikeaselkoisia?
         // Täytyy varmaan tehdä jokunen kuvaava apumetodi...
         public void siirraSotilas(int lahtoruutuX, int lahtoruutuY, int kohderuutuX, int kohderuutuY) {
@@ -717,7 +816,10 @@ public class Lauta {
                 System.out.println("Kuninkaan siirto ei ole mahdollinen.");
             }
         }
-
+        
+        /**
+         * Tulostaa pelilaudan valkean näkökulmasta
+         */
         // Tulostetaan pelilauta sopivasta katselusuunnasta.
         public void tulostaLauta() {
             // Valkean näkökulmasta ilmeisesti näin:

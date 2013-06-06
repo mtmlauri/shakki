@@ -366,7 +366,6 @@ public class Lauta {
     
     // Tutkii, onko pelaajan oma kuningas uhattuna
     // Käytämme metodia siirtojen testauksessa, että jääkö kuningas shakatuksi
-        // TÄYTYY TARKISTAA: siirraKuningas-metodin toimivuus, sillä se ei nyt toimi suunnitellusti...
         public boolean onkoPelaajaShakissa(int pelaaja, int[][] asema) { 
             int x;
             int y;
@@ -397,6 +396,12 @@ public class Lauta {
         public void onkoAsemaPatti() {
             
         }
+        
+        // Shakin, matin ja patin lisäksi myös muut pelin päättymistapahtumat voisi tutkia
+        // Luovuttaminen
+        // 50 siirron sääntö, helppo toteuttaa
+        // Aseman toistuminen 3. kerran, sama asema laudalla samoine erikoissiirtomahdollisuuksineen
+        // Materiaalipula
                
 ////////         Tutkitaan oman vuoron päättyessä
 ////////         Jos on shakkaus, niin onkoShakissa = true

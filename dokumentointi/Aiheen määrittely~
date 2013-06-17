@@ -1,0 +1,19 @@
+Aihe: Shakki-ohjelma
+
+Toteutetaan ohjelma, jolla kaksi pelaajaa voi pelata shakkia keskenään. Alkuvaiheessa siirrot syötetään näppäimistöllä ja jos siirto on laillinen, niin pelinappula(t) liikkuvat siirron mukaisesti. Shakkiohjelman tulee tuntea myös erikoissiirrot, kuten linnoittautuminen ja ohestalyönti.
+
+Peliaseman tallentaminen ja lataaminen tekstitiedostosta mahdollistetaan myöhemmin.
+
+Vielä myöhemmin voidaan tehdä shakkia pelaava tekoäly, joka ei ihan täysin arvo siirtoa.
+
+Käyttäjät: pelaaja(t)
+
+Toiminnot:
+ - uuden pelin aloittaminen
+ - (Puolen valinta, valkea/musta)
+ - nappulan siirtäminen
+  o onnistuu, jos siirto on laillinen
+
+
+
+

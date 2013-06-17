@@ -37,3 +37,33 @@ JavaDoccia, sekvenssikaaviota. Tutustumista käyttöliittymän ohjelmointiin.
 6 tuntia
 Käyttöliittymän aloitus. Uuden luokkajaon aloitusta.
 
+9.6.
+1 tunti
+Uutta luokkajakoa
+
+12.6.
+2 tuntia
+Uutta luokkajakoa
+
+14.6.
+2 tuntia
+Refaktorointia sinne ja tänne. En tiedä, millaisen luokkajaon lopulta teen.
+
+15.6.
+4 tuntia
+Exceptioneja sitten riittääkin. Luokkajako ei oikein etene.
+
+16.6.
+4 tuntia
+Nyt minulla alkaa olla käsitys siitä, millaisen luokkajaon haluaisin, jos saisin sen vaan toteutettua.
+
+17.6.
+7 tuntia
+Ohjelman perusluokkajako vaikuttaa mielestäni järkevältä, mutta miten laitan ohjelman suorittamaan siirtoja, suuri kysymys...
+Dokumentaatiota päivitetty. Sekvenssikaaviot taitavat jäädä puuttumaan... Testit samaten, yhden testin lisäsin
+Javadoccia kirjoiteltu
+
+Ohjelmasta ei juuri nyt näytä tulevan valmista...
+Refaktorointi selkeyttää kyllä koodia, mutta tuo mukanaan haasteita, en oikein tiedä, miten saisin siirrot sujumaan luontevasti...
+En ole tosin vielä kaikkea kokeillut, mutta tällä hetkellä ei ole aikaa perehtyä aiheeseen enempää...
+

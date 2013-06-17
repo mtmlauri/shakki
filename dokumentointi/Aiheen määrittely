@@ -1,18 +1,25 @@
-Aihe: Shakki-ohjelma
+Shakki-ohjelma
 
-Toteutetaan ohjelma, jolla kaksi pelaajaa voi pelata shakkia keskenään. Alkuvaiheessa siirrot syötetään näppäimistöllä ja jos siirto on laillinen, niin pelinappula(t) liikkuvat siirron mukaisesti. Shakkiohjelman tulee tuntea myös erikoissiirrot, kuten linnoittautuminen ja ohestalyönti.
+Tavoite on luoda ohjelma, jolla voidaan pelata shakki.
+Ohjelman tulisi tuntea kaikki nappuloiden liikesäännöt.
+Erilaisia tasapelilaskureita voisin yrittää lisätä ohjelmaan.
 
-Peliaseman tallentaminen ja lataaminen tekstitiedostosta mahdollistetaan myöhemmin.
+Alkuvaiheessa toteutetaan ohjelma, jolla kaksi pelaajaa voi pelata shakkia keskenään. Alkuvaiheessa siirrot syötetään näppäimistöllä ja jos siirto on laillinen, niin pelinappula(t) liikkuvat siirron mukaisesti.
 
-Vielä myöhemmin voidaan tehdä shakkia pelaava tekoäly, joka ei ihan täysin arvo siirtoa.
+Peliaseman tallentaminen ja lataaminen tekstitiedostosta mahdollistetaan myöhemmin, jos aikaa on.
+Samoin aseman asettaminen olisi mukava lisäys ohjelmaan. Aseman asetus voisi sisältää, paitsi nappulat, myös erikoissiirto-oikeudet, siirtovuoron, siirron/puolisiirron,...
+
+Myöhemmin olisi tarkoitus tehdä shakkia pelaava tekoäly. Tekoälyn tavoite olisi, ettei se ihan täysin arvo siirtoa. Olisi hienoa jos siirrot olisivat tavoitteellisia ja suunnitelmallisia, eikä sinne tänne poukkoilua. Mahdollisista siirroista voisi ensin yrittää karsia ne, jotka syöttävät nappulan suoraan viholliselle, koska useimmiten, muttei kuitenkaan aina, tälläinen siirto on todella huono.
+
+Pelille on nyt tehty graafinen käyttöliittymäkin. Siihen tulee jäämään hiottavaa tulevaisuuteen. Valittujen nappuloiden korostamista, laudan zoomailtavuus sopivaksi, pelinappuloiksi kirjaimien sijasta kuvia, ajanotto, siirtotilastot sopivalla notaatiolla (olisi muuten hienoa, jos päättynyttä peliä voisi myös selailla edestakaisin siirtotilastojen tukemana)...
 
 Käyttäjät: pelaaja(t)
 
 Toiminnot:
  - uuden pelin aloittaminen
- - (Puolen valinta, valkea/musta)
+ - Puolen valinta, valkea/musta (jos ja kun tekoäly valmistuu)
  - nappulan siirtäminen
-  o onnistuu, jos siirto on laillinen
+  o ohjelma suorittaa kaikki tarkistukset, myös laillisuustarkistukset.
 
 
 

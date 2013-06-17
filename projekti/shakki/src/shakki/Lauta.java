@@ -89,13 +89,6 @@ public class Lauta {
         //Laudan tulostusvaiheessa pitää myöhemmin käännellä katselusuunta oikeaksi. Nyt valkean näkökulmasta pitäisi katsella lautaa vasemmalta.
         public void alustaLauta() {
             // Kuinkahan lauta olisi järkevintä asettaa? Asetan sen kuitenkin suoraan.
-////            alustaTyhjaLauta();
-////            alustaKuninkaat();
-////            alustaDaamit();
-////            alustaTornit();
-////            alustaLahetit();
-////            alustaRatsut();
-////            alustaSotilaat();
             lauta = new int[][]{ {4, 1, 0, 0, 0, 0, -1, -4}, 
                 {2, 1, 0, 0, 0, 0, -1, -2}, 
                 {3, 1, 0, 0, 0, 0, -1, -3}, 
@@ -111,50 +104,7 @@ public class Lauta {
             kuninkaidenSijainti = new int[][]{ {4, 0}, {4, 7} };
         }
         
-//////////        public void alustaTyhjaLauta() {
-//////////            for (int i = 0; i < 8; i++) {
-//////////                for (int j = 0; j < 8; j++) {
-//////////                    lauta[i][j] = 0; 
-//////////                }
-//////////            }
-//////////        }
-//////////        
-//////////        public void alustaKuninkaat() {
-//////////            lauta[4][0] = 6;
-//////////            lauta[4][7] = -6;
-//////////        }
-//////////        
-//////////        public void alustaDaamit() {
-//////////            lauta[3][0] = 5;
-//////////            lauta[3][7] = -5;
-//////////        }
-//////////        
-//////////        public void alustaTornit() {
-//////////            lauta[0][0] = 4;
-//////////            lauta[7][0] = 4;
-//////////            lauta[0][7] = -4;
-//////////            lauta[7][7] = -4;
-//////////        }
-//////////        
-//////////        public void alustaLahetit() {
-//////////            lauta[2][0] = 3;
-//////////            lauta[5][0] = 3;
-//////////            lauta[2][7] = -3;
-//////////            lauta[5][7] = -3;
-//////////        }
-//////////        
-//////////        public void alustaRatsut() {
-//////////            lauta[1][0] = 2;
-//////////            lauta[6][0] = 2;
-//////////            lauta[1][7] = -2;
-//////////            lauta[6][7] = -2;
-//////////        }
-//////////        public void alustaSotilaat() {
-//////////            for (int i = 0; i < 8; i++) {
-//////////                lauta[i][1] = 1;
-//////////                lauta[i][6] = -1;
-//////////            }
-//////////        }
+
         
         /**
          * Alustaa laudan ruutuun (x,y) valitun nappulan
@@ -405,7 +355,10 @@ public class Lauta {
                
 ////////         Tutkitaan oman vuoron päättyessä
 ////////         Jos on shakkaus, niin onkoShakissa = true
-////////         Oikeastaan riittää tutkia a) shakkaako siirtynyt nappula b) paljastiko siirtynyt nappula takaansa shakin.
+////////         Oikeastaan riittää tutkia 
+                    // a) shakkaako siirtynyt nappula (tai toinen niistä linnoittautumisen tapauksessa)
+                    // b) paljastiko siirtynyt nappula takaansa shakin.
+                    // c) Ai niin, ohestalyöntikin voi paljastaa shakin...
 ////////             Mahdollisesti jopa kaksoisshakki eli a ja b, jolloin vastustajan ainoa mahdollisuus on liikuttaa kuningastaan pakoon.
 ////////         Tutkitaan lisäksi onko asema jopa matti
 //////        public boolean tutkiOnkoShakkaus(int lahtoruutuX, int lahtoruutuY, int kohderuutuX, int kohderuutuY) {
